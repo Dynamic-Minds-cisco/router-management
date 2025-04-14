@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNMP Monitoring Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e4e4e4;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #81a1c1;
+            letter-spacing: 1.5px;
+        }
+
+        .router-card {
+            background-color: #1f1f2f;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .router-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .router-card h2 {
+            color: #88c0d0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .router-card p {
+            color: #d8dee9;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .router-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .router-card li {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            color: #81a1c1;
+            margin-top: 20px;
+            font-size: 1.3rem;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #2e3440;
+            color: #88c0d0;
+            font-size: 1.1rem;
+        }
+
+        td {
+            background-color: #3b4252;
+            color: #e4e4e4;
+            font-size: 1rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2e3440;
+        }
+
+        tr:hover {
+            background-color: #4c566a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .router-card {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .router-card h2 {
+                font-size: 1.5rem;
+            }
+
+            th, td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SNMP Monitoring Dashboard</h1>
+
+        {% for router in routers %}
+        <div class="router-card">
+            <h2>Router Info (IP: {{ router.ip }})</h2>
+            <p><strong>Hostname:</strong> {{ router.hostname }}</p>
+            <p><strong>Domain:</strong> {{ router.domain }}</p>
+            <p><strong>Uptime:</strong> {{ router.uptime }} seconds</p>
+
+            <h3>CPU Load</h3>
+            <ul>
+                <li><strong>5s:</strong> {{ router.cpu['5s'] }}%</li>
+                <li><strong>1m:</strong> {{ router.cpu['1m'] }}%</li>
+                <li><strong>5m:</strong> {{ router.cpu['5m'] }}%</li>
+            </ul>
+
+            <h3>Memory Usage</h3>
+            <p><strong>{{ router.memory.used }} / {{ router.memory.total }}</strong> KB ({{ router.memory.percent | round(2) }}%)</p>
+
+            <h3>Interface Count</h3>
+            <p>Total Interfaces: {{ router.interface_count }}</p>
+
+            <h3>Interface Status</h3>
+            <table>
+                <tr>
+                    <th>Interface Name</th>
+                    <th>Status</th>
+                </tr>
+                {% for iface in router.interfaces %}
+                <tr>
+                    <td>{{ iface[0] }}</td>
+                    <td>{{ iface[1] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 SNMP Monitoring Dashboard. All Rights Reserved.</p>
+    </div>
+
+</body>
+</html>
