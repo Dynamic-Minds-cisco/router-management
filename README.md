@@ -21,11 +21,6 @@ Shows hostname, uptime, CPU, memory usage, and interface status
 
 Easily extendable with more OIDs and SNMP metrics
 
-📤 Prometheus Exporter
-Exposes SNMP metrics in Prometheus format
-
-Can be scraped by Prometheus server and visualized in Grafana
-
 Built with Flask and follows Prometheus data structure
 
 🚨 Discord Interface Alert Script
@@ -50,8 +45,6 @@ SNMP (snmpwalk/snmpget)
 Flask
 
 Nmap
-
-Prometheus
 
 Discord Webhooks
 
