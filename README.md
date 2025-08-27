@@ -1,18 +1,4 @@
 📡 Cisco Router Monitoring Suite
-🧠 Project by Team Dynamic Minds
-Members:
-
-Saksham Chopra
-
-Anuj Jyoti
-
-Sukhreet Kaur
-
-Ahmed Sheikh
-
-Junid Ahmed
-
-Muhammad Chaudhary
 
 🚀 Overview
 This project is a multi-component Cisco router monitoring system developed as part of a networking assignment. It leverages SNMP, Python, Flask, and Discord integrations to provide real-time insights into router performance and interface statuses.
